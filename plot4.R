@@ -1,38 +1,6 @@
 library(tidyverse)
 library(data.table)
-#==================================================
-action<- 4    # 1:plot1, 2:plot2, 3:plot3, 4:plot4, 
-#==================================================
-out_filename <- c("plt1.png", "plt2.png", "plt3.png", "plt4.png")
-#in_filename <- "household_power_consumption.txt"
-in_filename <- "x.txt"
-setwd("~/cw/data-science/04_Exploratory_Data_Analysis/01_the_basics_of_analytic_graphics/ExData_Plotting1")
-loc <- Sys.getlocale("LC_TIME")
-Sys.setlocale("LC_TIME", "C")
-#=============== BEGIN_OF_MAIN ========================================================
-tbl <- file_read(in_filename,
-                 t_from=strptime("2007-02-01 00:00:00", "%Y-%m-%d %H:%M:%S", tz="Europe/Paris"),
-                 t_to  =strptime("2007-02-03 00:00:00", "%Y-%m-%d %H:%M:%S", tz="Europe/Paris"))
-#--------------------------------------------------------------------
-#dev.off()
-if (action==1) {
-    plot1()
-} else if (action==2) {
-    plot2()
-} else if (action==3) {
-    plot3()
-} else if (action==4) {
-    par(mfrow=c(2, 2), mar=c(4,5,2,1), oma=c(1,1,1,1))    
-    with(tbl, {
-        plot2()
-        plot(DateTime, Voltage, type="l")
-        plot3(box=F)
-        plot(DateTime, Global_reactive_power, type="l")        
-    })
-}
-dev.copy(png, filename=out_filename[action], width=480, height=480)
-dev.off()
-#=============== END_OF_MAIN ========================================================
+#-----------------------------------------------------------------------
 file_read <- function(filename, t_from, t_to) {
     df <- fread(in_filename, sep=";", 
                 colClasses=c("Date"="character",
@@ -79,5 +47,35 @@ plot3 <- function(box=T) {
         #bty=n
     })
 }
-#-----------------------------------------------------------------------
-    
+#=============== BEGIN_OF_MAIN ========================================================
+action <- 4    # 1:plot1, 2:plot2, 3:plot3, 4:plot4, 
+#==================================================
+out_filename <- c("plt1.png", "plt2.png", "plt3.png", "plt4.png")
+in_filename <- "household_power_consumption.txt"
+#in_filename <- "x.txt"
+setwd("~/cw/data-science/04_Exploratory_Data_Analysis/01_the_basics_of_analytic_graphics/ExData_Plotting1")
+loc <- Sys.getlocale("LC_TIME")
+Sys.setlocale("LC_TIME", "C")
+tbl <- file_read(in_filename,
+                 t_from=strptime("2007-02-01 00:00:00", "%Y-%m-%d %H:%M:%S", tz="Europe/Paris"),
+                 t_to  =strptime("2007-02-03 00:00:00", "%Y-%m-%d %H:%M:%S", tz="Europe/Paris"))
+#--------------------------------------------------------------------
+#dev.off()
+if (action==1) {
+    plot1()
+} else if (action==2) {
+    plot2()
+} else if (action==3) {
+    plot3()
+} else if (action==4) {
+    par(mfrow=c(2, 2), mar=c(4,5,2,1), oma=c(1,1,1,1))    
+    with(tbl, {
+        plot2()
+        plot(DateTime, Voltage, type="l")
+        plot3(box=F)
+        plot(DateTime, Global_reactive_power, type="l")        
+    })
+}
+dev.copy(png, filename=out_filename[action], width=480, height=480)
+dev.off()
+#=============== END_OF_MAIN ========================================================
