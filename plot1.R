@@ -50,10 +50,10 @@ plot3 <- function(box=T) {
 #=============== BEGIN_OF_MAIN ========================================================
 action <- 1    # 1:plot1, 2:plot2, 3:plot3, 4:plot4, 
 #==================================================
-out_filename <- c("plt1.png", "plt2.png", "plt3.png", "plt4.png")
+out_filename <- c("plot1.png", "plot2.png", "plot3.png", "plot4.png")
 in_filename <- "household_power_consumption.txt"
 #in_filename <- "x.txt"
-setwd("~/cw/data-science/04_Exploratory_Data_Analysis/01_the_basics_of_analytic_graphics/ExData_Plotting1")
+#setwd("~/cw/data-science/04_Exploratory_Data_Analysis/01_the_basics_of_analytic_graphics/ExData_Plotting1")
 loc <- Sys.getlocale("LC_TIME")
 Sys.setlocale("LC_TIME", "C")
 tbl <- file_read(in_filename,
